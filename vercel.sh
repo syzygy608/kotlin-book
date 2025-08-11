@@ -14,4 +14,5 @@ tar xvzf mdbook-admonish.tar.gz
 
 # 設定 PATH
 export PATH="$(pwd):$PATH"
+mdbook-admonish install
 mdbook build
