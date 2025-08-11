@@ -28,21 +28,15 @@ D1stance (吳翰平)
 
 ![](/assets/environment/sample.png)
 
-因為 IDEA 裡面同時撰寫多個 Kotlin 檔案時會造成編譯錯誤，因為相同的函數名稱會被多個檔案定義，所以我們需要將這些檔案放在同一個 package 底下。
+因為 IDEA 裡面同時撰寫多個 Kotlin 檔案時會造成編譯錯誤，因為相同的函數名稱會被多個檔案定義，
+所以我們需要將檔案分開不同的 `modules` 來解決這個問題。
 
-## 建立 Kotlin Package
+## 新增 Module
 
-![](/assets/environment/package.png)
+點擊左上角的 "New" -> "Module"，選擇 "Kotlin" 作為模組類型，然後選擇 "JVM | IDEA" 作為模組 SDK。
 
-在專案視窗中，右鍵點擊 `src` 資料夾，選擇 "New" -> "Package"，輸入你想要的 package 名稱，例如 `example`。
+![](/assets/environment/module.png)
 
-這樣就會在 `src` 資料夾下建立一個新的 package 資料夾。
+![](/assets/environment/new_module.png)
 
-接著在這個 package 資料夾下建立 Kotlin 檔案，右鍵點擊 package 資料夾，選擇 "New" -> "Kotlin Class/File"，輸入檔案名稱，例如 `Main.kt`，
-這樣就會在 package 資料夾下建立一個新的 Kotlin 檔案，檔案開頭會自動加入 package 的宣告。
-
-```kotlin
-package example
-```
-
-這樣就可以在這個 package 底下撰寫 Kotlin 程式碼了，但記得上傳評測系統的時候，請將這行註解掉。
+這樣就有獨立的模組了，可以在這個模組裡面撰寫 Kotlin 程式碼。
