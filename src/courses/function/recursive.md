@@ -193,6 +193,123 @@ fun hanoi(n: Int, from: String, to: String, temp: String) {
 那麼，如果我們要用純函數來實作河內塔呢？
 我們需要知道什麼東西來做為參數，才可以保證每次呼叫都會得到相同的結果？
 
+假設我們要移動 $n$ 個盤子，從 `from` 柱子移動到 `to` 柱子，
+但其實根據每根柱子上的狀態不同，移動的方式也會不同，
+因為盤子放置是有規則限制的，所以在純函式中，我們需要傳遞每根柱子的狀態。
+
+假設我們有三根柱子 `A`, `B`, `C`，每根柱子上的盤子可以用一個 List 來表示，
+我們先寫一個輔助函式來產生移動盤子後的新狀態：
+
+```kotlin
+fun moveDisk(state: ArrayList<ArrayList<Int>>, n: Int, from: Int, to: Int): ArrayList<ArrayList<Int>> {
+    val newState = ArrayList(state.map { ArrayList(it) }) // 因為我們要符合純函式的要求，所以需要複製一份狀態
+    val temp = ArrayList<Int>()
+    repeat(n) {
+        temp.add(newState[from].removeLast()) // 將盤子拿到暫存區
+    }
+    repeat(n) {
+        newState[to].add(temp.removeLast()) // 將盤子放到 to
+    }
+    return newState
+}
+```
+
+這樣才可以好好的處理原本河內塔中移動 $n-1$ 個盤子的問題，
+接著我們就可以寫出純函式的河內塔遞迴：
+
+```kotlin
+fun hanoi(state: ArrayList<ArrayList<Int>>, n: Int, from: Int, to: Int): ArrayList<ArrayList<ArrayList<Int>>> {
+    val res = ArrayList<ArrayList<ArrayList<Int>>>()
+    if(n == 1) {
+        // 如果只有一個盤子，直接移動
+        res.add(moveDisk(state, n, from, to))
+        return res
+    }
+    val aux = 3 - from - to
+    // 三根柱子的編號和為 0 + 1 + 2 = 3，所以可以用 3 - from - to 得到暫存柱子的編號
+    val s1 = moveDisk(state, n - 1, from, aux)
+    // 將 n-1 個盤子從 from 移到 aux 的狀態
+    val s2 = moveDisk(s1, 1, from, to)
+    // 將最下面的盤子從 from 移到 to 的狀態
+
+    val move1 = hanoi(state, n - 1, from, aux)
+    // 遞迴將 n-1 個盤子從 from 移到 aux
+    val move2 = hanoi(s1, 1, from, to)
+    // 遞迴將最下面的盤子從 from 移到 to
+    val move3 = hanoi(s2, n - 1, aux, to)
+    // 遞迴將 n-1 個盤子從 aux 移到 to
+
+    // 將三個狀態合併
+    move1.forEach { res.add(it) }
+    move2.forEach { res.add(it) }
+    move3.forEach { res.add(it) }
+    return res
+}
+```
+
+$n = 4$ 的執行結果如下：
+```
+4 3 2
+1
+{}
+
+4 3
+1
+2
+
+4 3
+{}
+2 1
+
+4
+3
+2 1
+
+4 1
+3
+2
+
+4 1
+3 2
+{}
+
+4
+3 2 1
+{}
+
+{}
+3 2 1
+4
+
+{}
+3 2
+4 1
+
+2
+3
+4 1
+
+2 1
+3
+4
+
+2 1
+{}
+4 3
+
+2
+1
+4 3
+
+{}
+1
+4 3 2
+
+{}
+{}
+4 3 2 1
+```
+
 
 ## References
 

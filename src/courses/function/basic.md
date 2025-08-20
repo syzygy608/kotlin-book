@@ -1,7 +1,7 @@
 # 函數與 Lambda
 
 
-## 1. 為什麼需要「函數」？
+## 為什麼需要「函數」？
 
 ### 問題情境：重複的程式碼容易出錯
 
@@ -20,50 +20,7 @@ println(3 * 3.14159 * 5 * 5) // 圓面積
 2. **重用**：寫一次、用多次。
 3. **模組化**：把大型問題拆成小步驟，方便單元測試與多人協作。
 
-## 2. 純函數（Pure Function）
-
-### 定義
-
-純函數在相同輸入下，**永遠**產生相同輸出，並且不會產生任何外部副作用（不改變外部狀態、不讀寫全域變數、不要做 I/O、不要亂改傳入的資料結構）。
-
-### 範例
-
-```kotlin
-fun areaOfCircle(radius: Double): Double {
-    return Math.PI * radius * radius
-}
-```
-
-* 這是純函數：同樣 `radius` 一定回傳相同結果，沒有 `println`、沒有讀寫全域變數。
-
-#### 非純函數範例
-
-```kotlin
-var pi = 3.14
-fun areaWithMutablePi(radius: Double): Double {
-    return pi * radius * radius
-}
-// 借用全域變數 pi，這樣就不是純函數了。
-```
-
-```kotlin
-fun printArea(radius: Double) {
-    println("area = ${areaOfCircle(radius)}") // 有輸出（副作用）
-}
-```
-
-### 為什麼要傾向純函數？
-
-* **可預測**：更容易推理與測試。
-* **可重用**：可以在不同上下文中使用而不擔心副作用。
-* **與數學定義一致**：純函數符合數學函數的定義，便於理解。
-
-尤其是下個章節，因為純函數更加貼近數學定義，
-所以以純函數的角度來理解遞迴是更加清晰的。
-
-## 函數
-
-### 基本語法
+## 函數基本語法
 
 ```kotlin
 fun add(a: Int, b: Int): Int {
@@ -166,7 +123,94 @@ fun main() {
 
 ~~~
 
-## 4. 匿名函數（Lambda）與函數型別
+## 純函數（Pure Function）
+
+### 定義
+
+純函數在相同輸入下，**永遠**產生相同輸出，並且不會產生任何外部副作用（不改變外部狀態、不讀寫全域變數、不要做 I/O、不要亂改傳入的資料結構）。
+
+也許會多花費額外的記憶體空間，但是可以換來更好的可預測性與可重用性，
+對於初學者來說，純函數是理解函數式程式設計的基礎。
+
+純函數像「計算器」：輸入相同的數字，結果永遠一樣，不改變其他東西。
+非純函數像「收銀機」：不只計算價格，還會改變庫存、印發票（副作用）。
+
+
+### 純函數的兩大特性
+
+純函數有兩個重要特性：**確定性（Deterministic）** 與 **無副作用（No Side Effect）**，理解這兩點有助於掌握純函數的本質。
+
+#### 1. 確定性（Deterministic）
+
+純函數在相同輸入下，**每次都會產生相同的輸出**，這使得程式行為可預測、容易測試。
+
+```kotlin
+fun square(x: Int): Int {
+    return x * x
+}
+
+println(square(3))  // 輸出 9
+println(square(3))  // 輸出 9（每次輸入 3，結果一樣）
+```
+
+在上例中，無論呼叫多少次，`square(3)` 的輸出永遠是 9，符合確定性的要求。
+
+#### 2. 無副作用（No Side Effect）
+
+純函數在執行過程中，**不會改變外部狀態，也不會影響函數外的資料**。
+
+```kotlin
+var count = 0
+
+fun increaseCount() {
+    count++   // 改變外部變數，造成副作用
+}
+
+fun pureIncrease(x: Int): Int {
+    return x + 1   // 不改變外部變數，沒有副作用
+}
+
+println(count)    // 0
+increaseCount()
+println(count)    // 1（外部狀態被改變）
+
+println(pureIncrease(5))  // 6
+println(count)            // 1（純函數不改變外部狀態）
+```
+
+`increaseCount()` 會修改外部變數 `count`，產生副作用；
+`pureIncrease()` 僅回傳計算結果，沒有改變外部資料，屬於無副作用。
+
+---
+
+#### 非純函數範例
+
+```kotlin
+var pi = 3.14
+fun areaWithMutablePi(radius: Double): Double {
+    return pi * radius * radius
+}
+// 借用全域變數 pi，這樣就不是純函數了。
+```
+
+```kotlin
+fun printArea(radius: Double) {
+    println("area = ${areaOfCircle(radius)}") // 有輸出（副作用）
+}
+```
+
+建議把輸出與邏輯分開，純粹函數只做計算，不做 I/O。
+
+### 為什麼要傾向純函數？
+
+* **可預測**：更容易推理與測試。
+* **可重用**：可以在不同上下文中使用而不擔心副作用。
+* **與數學定義一致**：純函數符合數學函數的定義，便於理解。
+
+尤其是下個章節，因為純函數更加貼近數學定義，
+所以以純函數的角度來理解遞迴是更加清晰的。
+
+## 匿名函數（Lambda）與函數型別
 
 ### 什麼是 Lambda？
 
@@ -217,10 +261,9 @@ var list = readLine().split(" ").map { it.toInt() }
 
 * Lambda 語法更簡短
 * 可以搭配 filter、map 等操作更加方便
-* Lambda 可以捕捉外部變數
 
 
-## 5. 高階函數（Higher-order Functions）
+## 高階函數（Higher-order Functions）
 
 高階函數是指以函數為引數或回傳函數的函數。
 
