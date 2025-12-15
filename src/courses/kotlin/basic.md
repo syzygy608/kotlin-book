@@ -24,17 +24,25 @@ m = 30 // 可以修改 m 的值
 * 不能使用 Kotlin 的保留字。
 * 命名應該具有描述性，能夠清楚表達變數的用途。
 
-> **補充說明：** Kotlin 的變數名稱允許使用 Unicode 字元，也就是你可以用中文甚至 emoji 當變數名，但在競賽中建議還是使用英文與數字、底線，以維持通用性與可讀性。
+~~~admonish info title="補充說明"
+Kotlin 的變數名稱允許使用 Unicode 字元，也就是你可以用中文甚至 emoji 當變數名，
+但在競賽中建議還是使用英文與數字、底線，以維持通用性與可讀性。
+~~~
 
 ## 基本資料型別
 
+在電腦的世界中，我們育 0,1 來儲存資料，也就是二進位，像是 $10_{(10)}=1010_{(2)}$，
+其實就是 $2^3 \times 1 + 2^2 \times 0 + 2^1 \times 1 + 2^0 \times 0$，與我們常用的十進位相仿。
+
+一個二進位下的單位為位元，可以儲存兩個數字 0 和 1，兩位元可以表示 $0(00), 1(01), 2(10), 3(11)$。
+
 Kotlin 支援多種基本資料型別，包括：
 
-* `Int`：整數型別，32-bit 有號整數。 (範圍 $-2,147,483,648$ 到 $2,147,483,647$)
+* `Int`：整數型別，32-bit 有號整數，也就是一半給負數，一半給正數 <br>(範圍 $-2^{31} = -2,147,483,648$ 到 $2^{31} - 1 = 2,147,483,647$)
 * `Double`：雙精度浮點數型別，64-bit 浮點數。
 * `String`：字串型別。
 * `Boolean`：布林型別（`true` 或 `false`）。
-* `Char`：字元型別，表示單一字元。
+* `Char`：字元型別，表示單一字元，字元我們也是用數字儲存的，每字元有對應的代號 ([ASCII](https://www.geeksforgeeks.org/dsa/ascii-table/))
 * `Long`：長整數型別，64-bit 有號整數。 (範圍 $-9,223,372,036,854,775,808$ 到 $9,223,372,036,854,775,807$)
 
 這些資料型別可以用來儲存不同類型的資料，並且可以進行各種運算。
@@ -48,21 +56,18 @@ val initial: Char = 'D' // 字元
 val population: Long = 7000000000 // 長整數
 ```
 
-> **競賽小提醒：**
-> 在競程中，如果你需要處理超出 `Int` 範圍的數字（約 ±21 億），請使用 `Long`。另外，Kotlin 的整數運算不會自動溢位檢查，請留意運算結果是否超出範圍。
+在競程中，如果你需要處理超出 `Int` 範圍的數字（約 ±$2 \times 10^9$），請使用 `Long`，因為超出可以儲存範圍的話數字就不會用你以為的方式紀錄，會是不預期的數字。
 
 如果你不指定資料型別，Kotlin 會自動推斷變數的型別：
 
 ```kotlin
 val city = "Taipei" // Kotlin 會推斷 city 為 String 型別
-val temperature = 25.5 // Kotlin 會推斷 temperature 為 Double型別
+val temperature = 25.5 // Kotlin 會推斷 temperature 為 Double 型別
 ```
 
-> Kotlin 的型別推斷功能可以讓程式更簡潔，但在複雜情況下建議明確指定型別，避免因推斷錯誤導致的問題。
+Kotlin 的型別推斷功能可以讓程式更簡潔，但在複雜情況下建議明確指定型別，避免因推斷錯誤導致的問題。
 
 ## 輸出入
-
-在競賽中，輸入輸出效率非常重要，因為很多時候資料量很大，使用簡單的 `readLine()` 和 `println()` 可能會導致效能瓶頸。
 
 如果我們不只是直接給定變數的值，而是需要從使用者那裡獲取輸入，可以使用 `readLn()` 函數來讀取輸入：
 
@@ -153,33 +158,27 @@ fun main() {
 這樣可以提高程式的執行效率，特別是在需要大量輸入輸出的情況下。
 
 ```kotlin
-import java.io.*
+import java.io.* // 引用自 java
 
-// 使用 BufferedReader 和 BufferedWriter 來提高輸入輸出效率
 val br = BufferedReader(InputStreamReader(System.`in`))
 val bw = BufferedWriter(OutputStreamWriter(System.`out`))
-// 讀取一行輸入
-fun readLine() = br.readLine()!!
-fun write(x: Any) = bw.write(x.toString())
-fun writeln(x: Any) = bw.write("$x\n")
-fun flush() = bw.flush()
 
 fun main() {
     // 讀取兩個整數
-    val (num1, num2) = readLine().split(" ").map { it.toInt() }
+    val (num1, num2) = br.readLine()!!.split(" ").map{ it.toInt() }
     // 輸出它們的和
-    writeln(num1 + num2)
-    flush() // 確保所有輸出都被寫入
+    bw.write("${num1 + num2}\n")
+    bw.flush()
 }
 ```
 
-這樣的寫法可以讓我們在輸入完之後，只有呼叫 `flush()` 才會將所有輸出寫入，這樣可以提高程式的執行效率。
+這樣的寫法可以讓我們在輸入完之後，只有呼叫 `flush()` 才會將所有東西輸出，這樣可以提高程式的執行效率。
 
 你可能比較會疑惑的是為什麼 `readLine()` 後面要加上 `!!`，這是因為 `readLine()` 可能會返回 `null`，
 而 `Kotlin` 是一個注重安全的語言，在競程中我們通常會安心的覺得出題者不會給我們不合法的輸入，
 所以我們可以使用 `!!` 來告訴編譯器我們確定這個值不會是 `null`。
 
-但是原本教的 `readLn()` 不會回傳 `null`。
+原本教的 `readLn()` 不會回傳 `null`。
 
 ---
 
@@ -205,7 +204,7 @@ val difference = a - b // 減法
 val product = a * b // 乘法
 val quotient = a / b // 除法
 val remainder = a % b // 取餘數
-writeln("和：$sum, 差：$difference, 積：$product, 商：$quotient, 餘數：$remainder")
+bw.write("和：$sum, 差：$difference, 積：$product, 商：$quotient, 餘數：$remainder\n")
 ```
 
 > **注意：**
@@ -281,12 +280,16 @@ Kotlin 提供了幾種位元運算符來對整數進行位元運算：
 
 位元與運算是將兩個數字的每個位元進行比較，只有當兩個位元都是 1 時，結果才是 1，否則結果是 0。
 
+一般的數字沒有前綴就是十進位表示法，為了方便介紹位元運算，這裡的 `0b` 是指接下來的數字是二進位表示法。
+
 ```kotlin
 val a = 0b1100 // 二進位表示的 12
 val b = 0b1010 // 二進位表示的 10
 val result = a and b // 位元與運算
-writeln("位元與運算結果：${result.toString(2)}") // 輸出 1000
+bw.write("運算結果：${result.toString(2)}\n") // 輸出 1000
 ```
+
+直接輸出 `result` 的話會是 8，用 `toString(進位)` 的話可以輸出成指定進位的樣子。
 
 ##### 位元或運算（`or`）
 
@@ -296,7 +299,7 @@ writeln("位元與運算結果：${result.toString(2)}") // 輸出 1000
 val a = 0b1100 // 二進位表示的 12
 val b = 0b1010 // 二進位表示的 10
 val result = a or b // 位元或運算
-writeln("位元或運算結果：${result.toString(2)}") // 輸出 1110
+bw.write("運算結果：${result.toString(2)}\n") // 輸出 1110
 ```
 
 ##### 位元異或運算（`xor`）
@@ -307,7 +310,7 @@ writeln("位元或運算結果：${result.toString(2)}") // 輸出 1110
 val a = 0b1100 // 二進位表示的 12
 val b = 0b1010 // 二進位表示的 10
 val result = a xor b // 位元異或運算
-writeln("位元異或運算結果：${result.toString(2)}") // 輸出 0110
+bw.write("運算結果：${result.toString(2)}\n") // 輸出 0110
 ```
 
 ##### 位元取反運算（`inv`）
@@ -317,10 +320,8 @@ writeln("位元異或運算結果：${result.toString(2)}") // 輸出 0110
 ```kotlin
 val a = 0b1100 // 二進位表示的 12
 val result = a.inv() // 位元取反運算
-writeln("位元取反運算結果：${result.toString(2)}") // 輸出 0011
+bw.write("位元取反運算結果：${result.toString(2)}") // 輸出 0011
 ```
-
-這裡 `toString(2)` 是將數字轉換為二進位字串表示。
 
 ##### 位元移位運算
 
@@ -334,7 +335,7 @@ writeln("位元取反運算結果：${result.toString(2)}") // 輸出 0011
 ```kotlin
 val a = 0b1100 // 二進位表示的 12
 val result = a shl 2 // 左移兩位
-writeln("左移兩位結果：${result.toString(2)}") // 輸出 110000
+bw.write("左移兩位結果：${result.toString(2)}") // 輸出 110000
 ```
 
 使用 `shr`（右移位元）可以將數字的位元向右移動指定的位數假設 `a shr 2`，這會將 `a` 的位元向右移動兩位，結果是 $0011_{(2)}$，
@@ -343,9 +344,10 @@ writeln("左移兩位結果：${result.toString(2)}") // 輸出 110000
 ```kotlin
 val a = 0b1100 // 二進位表示的 12
 val result = a shr 2 // 右移兩位
-writeln("右移兩位結果：${result.toString(2)}") // 輸出 0011
+bw.write("右移兩位結果：${result.toString(2)}") // 輸出 0011
 ```
 
+在各種程式語言甚至硬體設計上來說，位移運算遠比乘法除法快速，善用移位可以提昇程式效率。
 
 ## 條件判斷
 
@@ -378,7 +380,7 @@ Kotlin 還有用來判斷是否在同一個記憶體位置的運算子 `===` 和
 ```kotlin
 val age = 18
 if (age >= 18) {
-    writeln("你已經成年了。")
+    bw.write("你已經成年了。")
 }
 ```
 
@@ -386,9 +388,10 @@ if (age >= 18) {
 ```kotlin
 val age = 16
 if (age >= 18) {
-    writeln("你已經成年了。")
-} else {
-    writeln("你還未成年。")
+    bw.write("你已經成年了。")
+}
+else {
+    bw.write("你還未成年。")
 }
 ``` 
 
@@ -396,13 +399,16 @@ if (age >= 18) {
 ```kotlin
 val score = 85
 if (score >= 90) {
-    writeln("優秀")
-} else if (score >= 80) {
-    writeln("良好")
-} else if (score >= 70) {
-    writeln("普通")
-} else {
-    writeln("需要加油")
+    bw.write("優秀")
+}
+else if (score >= 80) {
+    bw.write("良好")
+}
+else if (score >= 70) {
+    bw.write("普通")
+}
+else {
+    bw.write("需要加油")
 }
 ``` 
 
@@ -415,25 +421,25 @@ if (score >= 90) {
 ```kotlin
 val day = 3
 when (day) {
-    1 -> writeln("今天是星期一")
-    2 -> writeln("今天是星期二")
-    3 -> writeln("今天是星期三")
-    4 -> writeln("今天是星期四")
-    5 -> writeln("今天是星期五")
-    6 -> writeln("今天是星期六")
-    7 -> writeln("今天是星期日")    
-    else -> writeln("無效的日期")
+    1 -> bw.write("今天是星期一")
+    2 -> bw.write("今天是星期二")
+    3 -> bw.write("今天是星期三")
+    4 -> bw.write("今天是星期四")
+    5 -> bw.write("今天是星期五")
+    6 -> bw.write("今天是星期六")
+    7 -> bw.write("今天是星期日")    
+    else -> bw.write("無效的日期")
 }
 ```
 
-如果需要判斷多個條件，可以使用 `when` 的其他形式：
+如果需要判斷條件，而非一一對應，可以使用 `when` 的其他形式：
 ```kotlin
 val score = 85
 when {
-    score >= 90 -> writeln("優秀")
-    score >= 80 -> writeln("良好")
-    score >= 70 -> writeln("普通")
-    else -> writeln("需要加油")
+    score >= 90 -> bw.write("優秀")
+    score >= 80 -> bw.write("良好")
+    score >= 70 -> bw.write("普通")
+    else -> bw.write("需要加油")
 }
 ```
 
@@ -454,11 +460,11 @@ fun main() {
     val localVar = "區域變數"
     if (true) {
         val blockVar = "區塊變數"
-        writeln("訪問區塊變數：$blockVar")
+        bw.write("訪問區塊變數：$blockVar")
     }
-    writeln("訪問全域變數：$globalVar")
-    writeln("訪問區域變數：$localVar")
-    // writeln(blockVar) // 這裡會報錯，因為 blockVar 只在 if 區塊內部可見
+    bw.write("訪問全域變數：$globalVar")
+    bw.write("訪問區域變數：$localVar")
+    // bw.write(blockVar) // 這裡會報錯，因為 blockVar 只在 if 區塊內部可見
 }
 ```
 
@@ -470,7 +476,7 @@ fun main() {
 ```kotlin
 const val PI = 3.14159 // 全域常數
 fun main() {
-    writeln("圓周率的值是：$PI")
+    bw.write("圓周率的值是：$PI")
 }
 ```
 

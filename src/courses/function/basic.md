@@ -27,7 +27,7 @@ fun add(a: Int, b: Int): Int {
     return a + b
 }
 
-// 更簡潔的 expression body
+// 更簡潔的寫法
 fun addShort(a: Int, b: Int) = a + b
 ```
 
@@ -77,6 +77,19 @@ fun outer(x: Int) {
 
 保持函數單一職責（Single Responsibility），
 每個函數應該只做一件事。這樣便於命名、測試與重用。
+
+我們用來快速輸出入的 Buffer 也可以包成函數方便使用
+
+```kotlin
+import java.io.*
+
+val br = BufferedReader(InputStreamReader(System.`in`))
+val bw = BufferedWriter(OutputStreamWriter(System.`out`))
+fun readLine() = br.readLine()!!
+fun write(x: Any) = bw.write(x.toString())
+fun writeln(x: Any) = bw.write("$x\n")
+fun flush() = bw.flush()
+```
 
 ~~~admonish note title="例題"
 給定一個正整數 $n$，代表接下來會有一個 $n$ 次多項式，$a_0 x^0 + a_1 x^1 + ... + a_{n-1} x^{n-1}$，
@@ -204,7 +217,7 @@ fun printArea(radius: Double) {
 ### 為什麼要傾向純函數？
 
 * **可預測**：更容易推理與測試。
-* **可重用**：可以在不同上下文中使用而不擔心副作用。
+* **可多次重複使用**：可以在不同上下文中使用而不擔心副作用。
 * **與數學定義一致**：純函數符合數學函數的定義，便於理解。
 
 尤其是下個章節，因為純函數更加貼近數學定義，
@@ -219,7 +232,7 @@ Lambda 就是「沒有名字的函數」，可以像變數一樣被傳遞或儲�
 ### 基本語法
 
 ```kotlin
-// 顯式型別
+
 val sum: (Int, Int) -> Int = { a, b -> a + b }
 println(sum(3, 4)) // 7
 
@@ -235,7 +248,7 @@ val mul = { a: Int, b: Int -> a * b }
 val isEven: (Int) -> Boolean = { it % 2 == 0 }
 ```
 
-* 當 lambda 是函數的最後一個參數時，支援 trailing lambda 語法：
+* 當 lambda 是函數的最後一個參數時，支援 trailing lambda 語法，省略小括號
 
 ```kotlin
 val list = listOf(1,2,3,4)

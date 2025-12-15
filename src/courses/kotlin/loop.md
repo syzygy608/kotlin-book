@@ -19,7 +19,7 @@ D1stance (吳翰平)
 ```kotlin
 var count = 0
 while (count < 10) {
-    writeln("Hello, World!")
+    bw.write("Hello, World!\n")
     count++
 }
 ```
@@ -29,7 +29,7 @@ while (count < 10) {
 
 ```kotlin
 while (true) {
-    writeln("無限輸出")
+    bw.write("無限輸出\n")
 }
 ```
 
@@ -44,7 +44,7 @@ while (true) {
 ```kotlin
 var count = 0
 do {
-    writeln("至少會執行一次")
+    bw.write("至少會執行一次\n")
     count++
 } while (count < 10)
 ```
@@ -57,7 +57,7 @@ do {
 
 ```kotlin
 for (i in 1..10) {
-    writeln("第 $i 次輸出")
+    bw.write("第 $i 次輸出\n")
 }
 ```
 
@@ -66,15 +66,15 @@ for (i in 1..10) {
 
 ```kotlin
 for (i in 0 until 10) {
-    writeln(i) // i 從 0 到 9
+    bw.write("$i\n") // i 從 0 到 9
 }
 ```
 
-倒序可用 `downTo`：
+`downTo`：
 
 ```kotlin
 for (i in 10 downTo 1) {
-    writeln(i)
+    bw.write("$i\n") // 10 .. 1
 }
 ```
 
@@ -82,7 +82,7 @@ for (i in 10 downTo 1) {
 
 ```kotlin
 for (i in 0..10 step 2) {
-    writeln(i) // 輸出偶數：0,2,4,6,8,10
+     bw.write("$i\n") // 輸出偶數：0,2,4,6,8,10
 }
 ```
 
@@ -96,7 +96,7 @@ for (i in 0..10 step 2) {
 
 ```kotlin
 repeat(10) {
-    writeln("重複執行此行10次")
+    bw.write("重複執行此行10次\n")
 }
 ```
 
@@ -123,9 +123,9 @@ val arr = arrayOf(1, 2, 3, 4, 5)
 訪問及修改元素：
 
 ```kotlin
-writeln(arr[0])   // 1
+bw.write(arr[0])   // 1
 arr[0] = 10
-writeln(arr[0])   // 10
+bw.write(arr[0])   // 10
 ```
 
 ---
@@ -146,7 +146,7 @@ arr[0] = 100  // 可修改陣列內容
 val zeros = Array(5) { 0 }  // 大小5，全部初始化為0
 ```
 
-其中 `{ 0 }` 是一個 lambda 表達式，表示每個位置的初始值。
+其中 `{ 0 }` 表示每個位置的初始值。
 
 ---
 
@@ -181,7 +181,7 @@ val arrayList = arrayList<Int>()
 arrayList.add(1)
 arrayList.add(2)
 arrayList[0] = 10 // 修改第一個元素
-writeln(arrayList[0]) // 輸出 10
+bw.write(arrayList[0]) // 輸出 10
 arrayList.removeAt(1) // 刪除第二個元素
 ```
 
@@ -193,15 +193,12 @@ arrayList.removeAt(1) // 刪除第二個元素
 
 ```kotlin
 for (i in arr.indices) {
-    writeln(arr[i])
+    bw.write("$arr[i]\n")
 }
 
 for (item in list) {
-    writeln(item)
+    bw.write("$item\n")
 }
-
-// 或使用高階函數
-list.forEach { writeln(it) }
 ```
 
 ---
@@ -224,7 +221,7 @@ val matrix = Array(rows) { Array(cols) { 0 } }
 
 ```kotlin
 matrix[0][0] = 10
-writeln(matrix[0][0]) // 輸出 10
+bw.write(matrix[0][0]) // 輸出 10
 ```
 
 直接初始化：
@@ -262,7 +259,7 @@ val arrayListMatrix = arrayListOf(
     arrayListOf(7, 8, 9)
 )
 arrayListMatrix[0][0] = 10
-writeln(arrayListMatrix[0][0]) // 輸出 10
+bw.write(arrayListMatrix[0][0]) // 輸出 10
 ```
 
 ---
@@ -272,9 +269,9 @@ writeln(arrayListMatrix[0][0]) // 輸出 10
 ```kotlin
 for (row in matrix) {
     for (item in row) {
-        write("$item ")
+        bw.write("$item ")
     }
-    writeln("")
+    bw.write("\n")
 }
 ```
 
@@ -283,9 +280,9 @@ for (row in matrix) {
 ```kotlin
 for (i in matrix.indices) {
     for (j in matrix[i].indices) {
-        write("${matrix[i][j]} ")
+        bw.write("$matrix[i][j] ")
     }
-    writeln("")
+    bw.write("\n")
 }
 ```
 
