@@ -104,7 +104,7 @@ repeat(10) {
 
 ### 陣列與串列
 
-資料結構是用來儲存多筆資料的容器。Kotlin 提供多種陣列型結構，常見有 `Array`、`List` 和 `MutableList`。
+資料結構是用來儲存多筆資料的容器。Kotlin 提供多種陣列型結構，常見有 `Array`、`List` 和 `ArrayList`。
 
 ---
 
