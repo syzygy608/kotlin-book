@@ -9,7 +9,7 @@
 - [迴圈與陣列](courses/kotlin/loop.md)
 - [函式與 lambda](courses/function/basic.md)
 - [遞迴](courses/function/recursive.md)
-- [排序與二分搜尋法]()
+- [時間複雜度排序與二分搜尋法](courses/timeComplexityAndSort/main.md)
 - [常用擴充函式]()
 - [常用資料結構]()
 - [物件導向程式設計]()
