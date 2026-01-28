@@ -1,9 +1,5 @@
 # 環境架設與基礎介紹
 
-~~~admonish note title="作者"
-D1stance (吳翰平)
-~~~
-
 相較於 C++ 需要安裝編譯器、IDE 等工具，Kotlin 的環境架設相對簡單許多。  
 只要安裝 [JetBrains 的 IntelliJ IDEA](https://www.jetbrains.com/idea/) 就可以開始撰寫 Kotlin 程式碼，並享受完善的語法提示與自動完成。
 

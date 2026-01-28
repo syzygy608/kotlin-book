@@ -73,10 +73,9 @@ fun outer(x: Int) {
 }
 ```
 
-局部函數可以讓我們在函數內部定義其他函數，這樣可以封裝邏輯，避免污染全域命名空間。
-
+局部函數可以讓我們在函數內部定義其他函數，這樣可以區隔程式邏輯，同時避免把所有東西都塞在全域命名空間中。
 保持函數單一職責（Single Responsibility），
-每個函數應該只做一件事。這樣便於命名、測試與重用。
+每個函數應該只做一件事。這樣便於命名、測試與重複使用。
 
 我們用來快速輸出入的 Buffer 也可以包成函數方便使用
 
@@ -86,6 +85,8 @@ import java.io.*
 val br = BufferedReader(InputStreamReader(System.`in`))
 val bw = BufferedWriter(OutputStreamWriter(System.`out`))
 fun readLine() = br.readLine()!!
+fun readInt() = readLine().toInt()
+fun readInts() = readLine().split(" ").map { it.toInt() }
 fun write(x: Any) = bw.write(x.toString())
 fun writeln(x: Any) = bw.write("$x\n")
 fun flush() = bw.flush()
@@ -115,8 +116,8 @@ fun flush() = bw.flush()
 
 fun polynomialValue(coefficients: List<Int>, x: Int): Int {
     var result = 0
-    coefficients.forEachIndexed { index, coeff ->
-        result += coeff * x.toDouble().pow(index.toDouble()).toInt()
+    for(i in coefficients.indices) {
+        result += coefficients[i] * (x.toDouble().pow(i).toInt())
     }
     return result
 }
@@ -129,10 +130,7 @@ fun main() {
 }
 ```
 
-`forEachIndexed` 可以同時取得索引與值，這樣就可以在計算多項式時使用，
-因為多項式的每一項都是 $a_i x^i$，所以我們需要知道係數與指數。
-
-接著透過 .pow() 函數計算 $x^i$ 的值，然後乘上係數，最後累加起來就是多項式在 $x$ 處的值。
+透過 .pow() 函數計算 $x^i$ 的值，然後乘上係數，最後累加起來就是多項式在 $x$ 處的值。
 
 ~~~
 
@@ -217,7 +215,7 @@ fun printArea(radius: Double) {
 ### 為什麼要傾向純函數？
 
 * **可預測**：更容易推理與測試。
-* **可多次重複使用**：可以在不同上下文中使用而不擔心副作用。
+* **可多次重複使用**：可以在不同地方中使用而不擔心副作用。
 * **與數學定義一致**：純函數符合數學函數的定義，便於理解。
 
 尤其是下個章節，因為純函數更加貼近數學定義，
@@ -227,8 +225,7 @@ fun printArea(radius: Double) {
 
 ### 什麼是 Lambda？
 
-Lambda 就是「沒有名字的函數」，可以像變數一樣被傳遞或儲存。常用於一次性的行為（callback、集合處理）。
-
+Lambda 就是「沒有名字的函數」，可以像變數一樣被傳遞或儲存。常用於一次性的行為定義，或作為高階函數的參數。
 ### 基本語法
 
 ```kotlin
@@ -240,25 +237,26 @@ println(sum(3, 4)) // 7
 val mul = { a: Int, b: Int -> a * b }
 ```
 
+函數型別描述：`(A, B) -> C` 表示接收 A、B 回傳 C 的函數。
+
 ### 常見簡寫
 
-* 單參數 lambda 可以使用 `it`：
+單參數 lambda 可以使用 `it`
 
 ```kotlin
 val isEven: (Int) -> Boolean = { it % 2 == 0 }
 ```
 
-* 當 lambda 是函數的最後一個參數時，支援 trailing lambda 語法，省略小括號
+當 lambda 是函數的最後一個參數時，支援 trailing lambda 語法，省略小括號
 
 ```kotlin
 val list = listOf(1,2,3,4)
 val evens = list.filter { it % 2 == 0 }
 ```
 
-我們的 `filter` 函數接受一個 lambda 作為參數，這樣可以讓我們更方便地過濾集合，
-所以當 lambda 是最後一個參數時，可以把它移到括號外面，這樣更清晰。
+我們的 `filter` 函數接受一個 lambda 作為參數，將符合 lambda 條件的元素過濾出來。
 
-像是我們常用的 `map` 就是這樣的用法：
+當 lambda 是最後一個參數時，可以把它移到括號外面，這樣更清晰。像是我們常用的 `map` 就是這樣的用法：
 
 ```kotlin
 var list = readLine().split(" ").map { it.toInt() }
@@ -267,14 +265,11 @@ var list = readLine().split(" ").map { it.toInt() }
 後面的 `{ it.toInt() }` 就是 lambda，這樣可以把每個字串轉成整數。
 
 
-* 函數型別描述：`(A, B) -> C` 表示接收 A、B 回傳 C 的函數。
-
-
 ### 匿名函數 vs 構造 `fun`
 
 * Lambda 語法更簡短
 * 可以搭配 filter、map 等操作更加方便
-
+* 不適合複雜邏輯，這時候建議用 `fun` 定義具名函數
 
 ## 高階函數（Higher-order Functions）
 
@@ -299,12 +294,9 @@ fun main() {
 val nums = listOf(1,2,3,4,5)
 val squares = nums.map { it * it }
 val evens = nums.filter { it % 2 == 0 }
-val sum = nums.reduce { acc, v -> acc + v }
 ```
 
-`map` 常用來轉換每個元素，`filter` 用來過濾元素，`reduce` 用來累加或合併，
-這些函數我們在之後會詳細介紹。
-
+`map` 常用來轉換每個元素，`filter` 用來過濾元素。
 
 ## 實作習題
 

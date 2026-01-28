@@ -1,9 +1,5 @@
 ## 迴圈與陣列
 
-```admonish note title="作者"
-D1stance (吳翰平)
-```
-
 在上一節中，我們學習了基本的輸入輸出操作，現在將介紹如何用迴圈處理重複性任務，以及如何使用陣列和串列來儲存多筆資料。
 
 ---
@@ -262,6 +258,33 @@ arrayListMatrix[0][0] = 10
 bw.write(arrayListMatrix[0][0]) // 輸出 10
 ```
 
+我們也可以宣告空的二維可變串列，然後動態加入資料：
+
+```kotlin
+val dynamicMatrix = arrayListOf<ArrayList<Int>>()
+```
+
+如果我們已知這個倉庫有 `n` 的隔間，每個隔間最多能放 `m` 件物品，可以這樣初始化：
+
+```kotlin
+val n = 5 // 隔間數
+val m = 10 // 每個隔間最大物品數
+val warehouse = arrayListOf<ArrayList<Int>>()
+for (i in 0 until n) {
+    warehouse.add(arrayListOf<Int>())
+}
+```
+
+這樣我們就有一個有 `n` 個隔間的倉庫，每個隔間目前是空的，可以動態加入物品。
+
+但是這樣效率不太好，通常我們會混搭 `Array` 和 `ArrayList`，例如：
+
+```kotlin
+val warehouse = Array(n) { arrayListOf<Int>() }
+```
+
+反正倉庫的隔間數是固定的，用 `Array` 來存放每個隔間會比較好，而每個隔間內的物品數量不固定，所以用 `ArrayList` 來存放物品。
+
 ---
 
 #### 遍歷二維結構
@@ -275,12 +298,18 @@ for (row in matrix) {
 }
 ```
 
-或索引遍歷：
+透過 `in` 這個關鍵字進行元素遍歷，可以將整個結構內的元素依序取出。
+
+但是這樣比較沒有彈性，假設我們是要遍歷一個 Array 並在滿足某條件時修改元素，這時就可以使用 `indices`
+
 
 ```kotlin
 for (i in matrix.indices) {
     for (j in matrix[i].indices) {
-        bw.write("$matrix[i][j] ")
+        if ((i + j) % 2 == 0) {
+            matrix[i][j] = 0
+        }
+        bw.write("${matrix[i][j]} ")
     }
     bw.write("\n")
 }
