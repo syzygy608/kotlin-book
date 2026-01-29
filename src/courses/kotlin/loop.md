@@ -124,6 +124,13 @@ arr[0] = 10
 bw.write(arr[0])   // 10
 ```
 
+因為通常我們會已知需要的型態，可使用特定型態的陣列：
+
+```kotlin
+val intArr = IntArray(n) { 0 } // 大小為 n，初始值皆為 0
+val strArr = DoubleArray(n) { 0.0 } // 大小為 n，初始值皆為 0.0
+```
+
 ---
 
 ##### `val` 和 `var` 的差異
@@ -173,12 +180,13 @@ val list = listOf(1, 2, 3, 4, 5)
 建立可變串列：
 
 ```kotlin
-val arrayList = arrayList<Int>()
+val arrayList = arrayListOf<Int>()
 arrayList.add(1)
 arrayList.add(2)
 arrayList[0] = 10 // 修改第一個元素
 bw.write(arrayList[0]) // 輸出 10
 arrayList.removeAt(1) // 刪除第二個元素
+arrayList.removeLast() // 刪除最後一個元素
 ```
 
 ---
