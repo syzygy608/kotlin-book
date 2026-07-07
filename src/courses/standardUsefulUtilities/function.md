@@ -38,7 +38,7 @@ val evenSquares = numbers
 bw.write("偶數的平方: $evenSquares\n") // 輸出: 偶數的平方: [4, 16, 36, 64, 100]
 ```
 
-雖然這些操作都可以透過傳統的迴圈來實現，但使用這些內建函數能讓程式碼更簡潔易讀。
+雖然這些操作都可以透過傳統的迴圈來實現，但使用這些內建函數能讓程式碼更簡潔易讀，同時符合 FP (Functional Programming) 的風格，減少副作用 (side effects) 的產生。
 
 ### ForEach 迴圈
 

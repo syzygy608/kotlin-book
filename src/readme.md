@@ -3,7 +3,7 @@
 Kotlin Book 使用 Rust 團隊的 MDBook 作為網站的內容管理系統，加上 [MDBook Admonish](https://github.com/tommilligan/mdbook-admonish) 來美化網站布局、[MDBbook Katex](https://github.com/lzanini/mdbook-katex) 來改善數學式渲染，並使用 Vercel 作為靜態網站的部署平台。
 
 Kotlin 是一個現代化的程式語言，具有簡潔的語法和強大的功能，適用於各種應用程式開發，包括 Android 應用程式、Web 應用程式和後端服務。Kotlin 的設計目標是提高開發效率，減少錯誤，並提供更好的可讀性。近年來 ICPC 系列賽事中，Kotlin 也逐漸成為一個受歡迎的選擇，
-但是台灣社群缺少對於 Kotlin 的競程相關內容，因此我們決定建立這個網站，提供一個完整的 Kotlin 競程學習資源。
+但是台灣社群缺少對於 Kotlin 的競程相關內容，因此我決定建立這個網站，提供一個完整的 Kotlin 競程學習資源。
 
 ## 使用說明
 

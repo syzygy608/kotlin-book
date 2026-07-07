@@ -8,7 +8,7 @@
 在競賽程式設計（Competitive Programming, CP）領域，Kotlin 雖然不像 C++ 那麼主流，但它有一些值得考慮的優勢：
 
 - **內建大數支援**  
-  Kotlin 可以使用  `BigInteger` 與 `BigDecimal`，處理大數運算比 C++ 方便，而在速度上又比 Python 快。
+  Kotlin 可以使用 `BigInteger` 與 `BigDecimal`，處理大數運算比 C++ 方便，而在速度上又比 Python 快。
 
 - **更安全的語言設計**  
   Null 安全 (`?`、`!!`、`?:`) 讓許多不安全的記憶體操作在編譯階段就能被發現，減少低級失誤。
@@ -18,6 +18,9 @@
 
 - **跨平台與 Java 互通性**  
   能直接呼叫 Java 標準函式庫與資料結構，例如 `ArrayList`、`HashMap`，並享有 Java 生態的豐富資源。
+
+- **Functional Programming 支援**  
+  Kotlin 支援函式式程式設計，讓程式碼更具表達力，並能更容易地進行資料處理與轉換。
 
 - **缺點與挑戰**
   - 執行速度普遍略慢於 C++
