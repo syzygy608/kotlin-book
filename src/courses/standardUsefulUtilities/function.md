@@ -108,6 +108,41 @@ bw.write("Folded String: $result\n") // 輸出: Folded String: K-o-t-l-i-n
 
 fold 函式讓我們能夠以更函數式的方式來處理資料，提升程式碼的可讀性與維護性。
 
+
+### runningFold
+
+`runningFold(initial, operation)`：給定一個初始值，從左到右將串列中的元素進行累加/處理。與 `fold` 只給最終結果不同，它會回傳一個包含**初始值與所有沿途變化過程**的串列。
+
+**範例**
+
+```kotlin
+val deposits = listOf(10, 20, 30)
+// 假設初始餘額為 0，記錄每一次存錢後的帳戶餘額
+val balances = deposits.runningFold(0) { acc, money -> acc + money }
+
+bw.write("Balances: $balances\n") 
+// 輸出: Balances: [0, 10, 30, 60]
+
+```
+
+### flatMap
+
+`flatMap(transform)`：對串列中的每個元素執行轉換（轉換結果必須是另一個串列或集合），最後將所有產生的小串列「攤平」合併成一個單一的長串列。
+
+**範例**
+
+```kotlin
+val numbers = listOf(1, 2, 3)
+// 將每個數字 x 轉換成一個包含 [x, -x] 的小串列，然後全部攤平
+val flatMapped = numbers.flatMap { listOf(it, -it) }
+
+bw.write("FlatMapped: $flatMapped\n") 
+// 輸出: FlatMapped: [1, -1, 2, -2, 3, -3]
+
+```
+
+---
+
 ## 對單變數作用的常用函數
 
 - `coreceIn(min, max)`: 將數值限制在指定範圍內。
