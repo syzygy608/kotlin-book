@@ -13,10 +13,11 @@
 - [常用擴充函式](courses/standardUsefulUtilities/function.md)
 - [常用資料結構](courses/standardUsefulUtilities/data-structure.md)
 - [掃描線、雙指針技巧與靜態區間操作](courses/scaningTwoPointerRQ/introduction.md)
+    - [靜態區間操作](courses/scaningTwoPointerRQ/static-range.md)
     - [掃描線](courses/scaningTwoPointerRQ/scan-line.md)
+    - [雙指針](courses/scaningTwoPointerRQ/two-pointer.md)
 - [貪婪法]()
 - [動態規劃]()
 - [圖論基礎]()
 - [數論]()
 - [區間查詢資料結構]()
-

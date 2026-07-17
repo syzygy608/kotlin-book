@@ -11,7 +11,7 @@
 - 預約 B：開始時間 2，結束時間 4
 - 預約 C：開始時間 3，結束時間 5
 
-這樣代表在時間 3 時，預約 A 與預約 B 都還在進行中，而預約 C 剛好在時間 3 開始，所以在時間 3 時，總共有三個預約同時進行。
+這樣代表在時間 3 時，預約 A 與預約 B 都還在進行中，而預約 C 在時間 3 才開始，所以在時間 3 時，總共有兩個預約同時進行。
 
 ## Specification
 - $1 \leq n \leq 10^5$
@@ -25,7 +25,7 @@
 ```
 ## Output
 ```
-3
+2
 ```
 ~~~
 
@@ -39,9 +39,7 @@
 與其用時間來搜尋預約，不如只記錄所有預約的開始時間與結束時間，然後依照時間排序，接著從最小的時間開始掃描，遇到開始時間就將同時進行的預約數量加一，遇到結束時間就將同時進行的預約數量減一。
 這樣就可以在 $O(n \log n)$ 的時間內解決這個問題。
 
-這也是所謂的掃描線技巧，因為我們就像一條線從最小的時間掃描到最大的時間，並且在每個時間點更新同時進行的預約數量，
-經過排序之後，我們只需要掃描所有的時間點，並且在每個時間點更新同時進行的預約數量，最後取最大值即可。
-
+這類問題我們只需要關心狀態改變的瞬間，這個將區間拆分成兩個事件，透過事先將事件排序之後，在端點上處理計算的作法，我們就稱為掃描線（一維）。
 
 ~~~admonish info title="範例程式碼" collapsible=true
 ```kotlin
@@ -55,8 +53,8 @@ fun main() {
         events.add(Pair(end, -1)) // 結束時間，減少同時進行的預約數量
     }
 
-    // 依照時間排序，若時間相同，先處理開始時間，再處理結束時間，這樣才能正確計算同時進行的預約數量 
-    events.sortWith(compareBy({ it.first }, { -it.second }))
+    // 依照時間排序，若時間相同，先處理結束事件
+    events.sortWith(compareBy({ it.first }, { it.second }))
 
     var current = 0
     var maxConcurrent = 0
@@ -82,11 +80,27 @@ fun main() {
         events.add(Pair(start, end))
     }
     val maxConcurrent = events.flatMap { listOf(Pair(it.first, 1), Pair(it.second, -1)) }
-        .sortedWith(compareBy({ it.first }, { -it.second }))
-        .runningFold(0) { acc, (_, type) -> acc + type }
+        .sortedWith(compareBy({ it.first }, { it.second }))
+        .scan(0) { acc, (_, type) -> acc + type }
         .maxOrNull() ?: 0
     println(maxConcurrent)
 }
 ```
 ~~~
 
+排序的時候，需要注意一些邊界情況，例如 $(1, 3)$ 和 $(3, 4)$ 這兩個區間，在題目的敘述中是否算是有重疊？
+上面的例題中是視為沒有重合的，假設我們要算的是所有區間覆蓋的長度，理論上 $(1, 3)$ 和 $(3, 4)$ 應該是完美接軌的，
+這時候就應該先處理完進入事件才處理離開事件。
+
+### 掃描線的核心步驟
+
+1. 把所有事件依座標(通常是 x 或時間)排序
+2. 用一個「掃描指標」沿座標軸移動
+3. 每碰到一個事件,就更新目前維護的資料結構
+4. 在需要的時間點查詢/記錄目前狀態
+
+### 練習題單
+
+- [Codeforces 22D](https://codeforces.com/problemset/problem/22/D)
+- [AtCoder ABC 183 D](https://atcoder.jp/contests/abc183/tasks/abc183_d)
+- [Codeforces 1915 F](https://codeforces.com/problemset/problem/1915/F)
