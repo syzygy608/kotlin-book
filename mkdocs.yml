@@ -1,0 +1,97 @@
+site_name: Kotlin Book
+site_url: https://kotlin-book.vercel.app
+theme:
+  name: materialx
+  language: zh-Hant
+  palette:
+      # Palette toggle for light mode
+      - media: "(prefers-color-scheme: light)"
+        scheme: default
+        primary: indigo
+        accent: indigo
+        toggle:
+          icon: material/brightness-7
+          name: Switch to dark mode
+
+      # Palette toggle for dark mode
+      - media: "(prefers-color-scheme: dark)"
+        scheme: slate
+        primary: purple
+        accent: purple
+        toggle:
+          icon: material/brightness-4
+          name: Switch to light mode
+  features:
+    # === 導航功能 ===
+    - navigation.sections  # 側邊欄分區顯示
+    - navigation.expand    # 自動展開導航項
+    - navigation.top       # 顯示返回頂部按鈕
+    - navigation.footer    # 顯示頁腳導航
+    - toc.follow          # 目錄跟隨滾動
+
+    # === 搜尋功能 ===
+    - search.highlight    # 搜尋結果高亮顯示
+    - search.share       # 可分享搜尋結果
+    - search.suggest     # 搜尋建議
+
+    # === 內容功能 ===
+    - content.code.copy   # 程式碼區塊可複製
+    - content.tabs.link   # 分頁內容可連結
+
+    # === 進階功能 ===
+    - navigation.tracking # 跟蹤導航位置
+    - navigation.instant  # 即時頁面切換
+    - header.autohide     # 滾動時自動隱藏頁首
+    - announce.dismiss    # 可關閉公告
+
+markdown_extensions:
+  - tables                 # 支援表格功能
+  - attr_list             # 支援屬性列表
+  - md_in_html            # 支援在 HTML 中使用 Markdown
+  - pymdownx.highlight:    # 程式碼高亮
+      anchor_linenums: true  # 行號錨點
+  - pymdownx.superfences   # 支援高級圍欄程式碼區塊
+  - admonition            # 支援提示區塊
+  - pymdownx.details      # 支援可折疊區塊
+  - pymdownx.tabbed:      # 支援分頁內容
+      alternate_style: true
+  - footnotes             # 支援腳註
+  - def_list              # 支援定義列表
+  - pymdownx.tasklist:    # 支援任務列表
+      custom_checkbox: true  # 自定義核取方塊樣式
+  - toc:                  # 目錄設置
+      permalink: true     # 顯示標題永久連結
+
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css
+
+plugins:
+  - search
+
+nav:
+  - 網站簡介: index.md
+  - 環境架設與基礎介紹: courses/environment/main.md
+  - Kotlin 基礎: courses/kotlin/basic.md
+  - 迴圈與陣列: courses/kotlin/loop.md
+  - 函式與 lambda: courses/function/basic.md
+  - 遞迴: courses/function/recursive.md
+  - 時間複雜度排序與二分搜尋法: courses/timeComplexityAndSort/main.md
+  - 常用擴充函式: courses/standardUsefulUtilities/function.md
+  - 常用資料結構: courses/standardUsefulUtilities/data-structure.md
+  - 掃描線、雙指針技巧與靜態區間操作:
+      - 靜態區間操作: courses/scaningTwoPointerRQ/static-range.md
+      - 掃描線: courses/scaningTwoPointerRQ/scan-line.md
+      - 雙指針: courses/scaningTwoPointerRQ/two-pointer.md
+  - 貪心法: courses/greedy/main.md
+  # - 動態規劃: todo.md
+  # - 圖論基礎: todo.md
+  # - 數論: todo.md
+  # - 區間查詢資料結構: todo.md

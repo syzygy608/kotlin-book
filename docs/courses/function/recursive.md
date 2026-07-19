@@ -87,43 +87,39 @@ fun subsets(s: List<Int>): List<List<Int>> {
 
 執行結果如下
 
-![](/assets/function/subset.png)
+![](../../assets/function/subset.png)
 
 
-~~~admonish note title="想想看"
-如果今天我們要解決的是列出由 $1 \sim n$ 數字組成的所有排列，
-像是 $n=3$ 時，會有 $6$ 種排列：$123, 132, 213, 231, 312, 321$，
-我們可以透過類似的方式來解決這個問題嗎？
-~~~
+!!! note "想想看"
+    如果今天我們要解決的是列出由 $1 \sim n$ 數字組成的所有排列，
+    像是 $n=3$ 時，會有 $6$ 種排列：$123, 132, 213, 231, 312, 321$，
+    我們可以透過類似的方式來解決這個問題嗎？
 
-~~~admonish info title="想好了再看" collapsible=true
+??? info "想好了再看"
+    當然可以，我們可以留下一個數字，然後將剩餘的數字遞迴地排列起來。
 
-當然可以，我們可以留下一個數字，然後將剩餘的數字遞迴地排列起來。
-接著我們就可以選擇這個數字要插在哪個位置，把這個數字插在剩餘數字組成之排列上的每個位置上。
+    接著我們就可以選擇這個數字要插在哪個位置，把這個數字插在剩餘數字組成之排列上的每個位置上。
 
-```kotlin
-fun permutations(s: List<Int>): List<List<Int>> {
-    if(s.isEmpty())
-        return listOf(emptyList())
-    val first = s.first()
-    val permutationsWithoutFirst = permutations(s.subList(1, s.size))
-    val result = mutableListOf<List<Int>>()
-    permutationsWithoutFirst.forEach { perm ->
-        for(i in 0..perm.size) {
-            // 在每個位置插入 first
-            result.add(perm.subList(0, i) + first + perm.subList(i, perm.size))
+    ```kotlin
+    fun permutations(s: List<Int>): List<List<Int>> {
+        if(s.isEmpty())
+            return listOf(emptyList())
+        val first = s.first()
+        val permutationsWithoutFirst = permutations(s.subList(1, s.size))
+        val result = mutableListOf<List<Int>>()
+        permutationsWithoutFirst.forEach { perm ->
+            for(i in 0..perm.size) {
+                // 在每個位置插入 first
+                result.add(perm.subList(0, i) + first + perm.subList(i, perm.size))
+            }
         }
+        return result
     }
-    return result
-}
-```
-
-`forEach` 就是 `for` + `in` 的高階版本，
-除了一一列出元素之外，還可以直接操作每個元素。
-
-
-~~~
-
+    ```
+    
+    `forEach` 就是 `for` + `in` 的高階版本，
+    除了一一列出元素之外，還可以直接操作每個元素。
+    
 ## 遞迴小結
 
 - 遞迴是萬能的

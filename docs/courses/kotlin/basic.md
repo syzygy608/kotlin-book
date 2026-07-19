@@ -20,11 +20,12 @@ m = 30 // 可以修改 m 的值
 * 不能使用 Kotlin 的保留字。
 * 命名應該具有描述性，能夠清楚表達變數的用途。
 
-~~~admonish info title="補充說明"
-Kotlin 的變數名稱允許使用 Unicode 字元，也就是你可以用中文甚至 emoji 當變數名，
-但在競賽中建議還是使用英文與數字、底線，以維持通用性與可讀性，
-也可以減少切換輸入法的時間。
-~~~
+
+!!! info "補充說明"
+    Kotlin 的變數名稱允許使用 Unicode 字元，也就是你可以用中文甚至 emoji 當變數名，
+    但在競賽中建議還是使用英文與數字、底線，以維持通用性與可讀性，
+    也可以減少切換輸入法的時間。
+
 
 ## 基本資料型別
 
@@ -136,18 +137,16 @@ fun main() {
 }
 ```
 
-~~~admonish info title="例題"
-請寫一個程式，要求使用者輸入兩個整數，然後輸出它們的和。
-~~~
+!!! info "例題"
+    請寫一個程式，要求使用者輸入兩個整數，然後輸出它們的和。
 
-~~~admonish note title="解答" collapsible=true
-```kotlin
-fun main() {
-    val (num1, num2) = readLn().split(" ").map { it.toInt() }
-    println("${num1 + num2}")
-}
-```
-~~~
+??? note "解答"
+    ```kotlin
+    fun main() {
+        val (num1, num2) = readLn().split(" ").map { it.toInt() }
+        println("${num1 + num2}")
+    }
+    ```
 
 ### 使用 BufferedReader 與 BufferedWriter 提升輸入輸出效率
 

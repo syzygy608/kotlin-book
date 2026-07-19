@@ -201,7 +201,7 @@ for (item in list) {
 
 處理矩陣型資料時，我們會用到二維結構。
 
-#### 二維陣列 (Array\<Array<T>>)
+#### 二維陣列 (Array<Array<T\>\>)
 
 指定大小：
 
@@ -230,7 +230,7 @@ val matrix = arrayOf(
 
 ---
 
-#### 二維 List (List\<List<T>>)
+#### 二維 List (List<List<T\>\>)
 
 不可變：
 
@@ -244,7 +244,7 @@ val listMatrix = listOf(
 
 ---
 
-#### 可變二維 List (ArrayList\<ArrayList<T>>)
+#### 可變二維 List (ArrayList<ArrayList<T\>\>)
 
 ```kotlin
 val arrayListMatrix = arrayListOf(

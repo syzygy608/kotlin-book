@@ -32,21 +32,21 @@
 
 前往 [JetBrains 的下載頁面](https://www.jetbrains.com/idea/download/) 下載 IntelliJ IDEA 的安裝程式，根據你的作業系統選擇合適的版本進行安裝。
 
-![](/assets/environment/idea.png)
+![](../../assets/environment/idea.png)
 
 下載好安裝程式後，執行它並按照指示完成安裝，一直按下一步直到出現這個畫面：
 
-![](/assets/environment/idea_path.png)
+![](../../assets/environment/idea_path.png)
 
 將 `idea` 的路徑加入到系統的環境變數中。
 
 安裝完成後，啟動 IntelliJ IDEA，並選擇 **"Create New Project"**，選擇 **"Kotlin"** 作為專案類型，然後選擇 **"JVM | IDEA"** 作為專案 SDK。
 
-![](/assets/environment/new_project.png)
+![](../../assets/environment/new_project.png)
 
 新增好之後就會自動生成一個範例程式碼，按下播放鍵來執行，就能看到輸出結果：
 
-![](/assets/environment/sample.png)
+![](../../assets/environment/sample.png) 
 
 ---
 
@@ -62,9 +62,9 @@
 1. 在左上角專案面板中點擊 **"New" → "Module"**。
 2. 選擇 **"Kotlin"** 作為模組類型，並選擇 **"JVM | IDEA"** 作為模組 SDK。
 
-![](/assets/environment/module.png)
+![](../../assets/environment/module.png)
 
-![](/assets/environment/new_module.png)
+![](../../assets/environment/new_module.png)
 
 這樣就有獨立的模組了，可以在這個模組裡撰寫 Kotlin 程式碼，避免名稱衝突。
 
@@ -78,4 +78,3 @@
 | I/O 加速       | `ios::sync_with_stdio(false)` | 使用 `BufferedReader` / `BufferedWriter` |
 | 大數支援       | 無內建   | 內建 `BigInteger` / `BigDecimal`     |
 | Null 安全檢查  | 無                    | 編譯器檢查（`?`、`!!`、`?:`）        |
-

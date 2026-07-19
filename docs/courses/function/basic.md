@@ -92,53 +92,51 @@ fun writeln(x: Any) = bw.write("$x\n")
 fun flush() = bw.flush()
 ```
 
-~~~admonish note title="例題"
-給定一個正整數 $n$，代表接下來會有一個 $n$ 次多項式，$a_0 x^0 + a_1 x^1 + ... + a_{n-1} x^{n-1}$，
-接下來第二行有 $n$ 個整數 $a_0, a_1, ..., a_{n-1}$，代表這個多項式的係數。
+!!! note "例題"
+    給定一個正整數 $n$，代表接下來會有一個 $n$ 次多項式，$a_0 x^0 + a_1 x^1 + ... + a_{n-1} x^{n-1}$，
+    接下來第二行有 $n$ 個整數 $a_0, a_1, ..., a_{n-1}$，代表這個多項式的係數。
 
-接下來有一個整數 $x$，代表要計算多項式在 $x$ 處的值，
-請使用函數來計算這個多項式在 $x$ 處的值。
-~~~
+    接下來有一個整數 $x$，代表要計算多項式在 $x$ 處的值，
+    請使用函數來計算這個多項式在 $x$ 處的值。
 
-~~~admonish info title="範例" collapsible=true
-```kotlin
-import java.io.*
-import java.math.*
-import java.util.*
-import kotlin.math.*
-
-val br = BufferedReader(InputStreamReader(System.`in`))
-val bw = BufferedWriter(OutputStreamWriter(System.`out`))
-fun readLine() = br.readLine()!!
-fun write(x: Any) = bw.write(x.toString())
-fun writeln(x: Any) = bw.write("$x\n")
-fun flush() = bw.flush()
-
-fun pow(base: Int, exp: Int): Int {
-    var result = 1
-    repeat(exp) { result *= base }
-    return result
-}
-
-fun polynomialValue(coefficients: List<Int>, x: Int): Int {
-    var result = 0
-    for(i in coefficients.indices) {
-        result += coefficients[i] * pow(x, i)
+??? info "範例程式碼"
+    ```kotlin
+    import java.io.*
+    import java.math.*
+    import java.util.*
+    import kotlin.math.*
+    
+    val br = BufferedReader(InputStreamReader(System.`in`))
+    val bw = BufferedWriter(OutputStreamWriter(System.`out`))
+    fun readLine() = br.readLine()!!
+    fun write(x: Any) = bw.write(x.toString())
+    fun writeln(x: Any) = bw.write("$x\n")
+    fun flush() = bw.flush()
+    
+    fun pow(base: Int, exp: Int): Int {
+        var result = 1
+        repeat(exp) { result *= base }
+        return result
     }
-    return result
-}
-fun main() {
-    val n = readLine().toInt()
-    val coefficients = readLine().split(" ").map { it.toInt() }
-    val x = readLine().toInt()
-    writeln(polynomialValue(coefficients, x))
-    flush()
-}
-```
+    
+    fun polynomialValue(coefficients: List<Int>, x: Int): Int {
+        var result = 0
+        for(i in coefficients.indices) {
+            result += coefficients[i] * pow(x, i)
+        }
+        return result
+    }
+    fun main() {
+        val n = readLine().toInt()
+        val coefficients = readLine().split(" ").map { it.toInt() }
+        val x = readLine().toInt()
+        writeln(polynomialValue(coefficients, x))
+        flush()
+    }
+    ```
 
-透過 pow(x, i) 函數計算 $x^i$ 的值，然後乘上係數，最後累加起來就是多項式在 $x$ 處的值。
-
-~~~
+    透過 pow(x, i) 函數計算 $x^i$ 的值，然後乘上係數，最後累加起來就是多項式在 $x$ 處的值。
+  
 
 ## 純函數（Pure Function）
 
@@ -324,4 +322,3 @@ fun c(n: Int) { println(n) }
 ```
 
 **解答要點**：`a` 是純函數，`b` 非純（修改外部變數），`c` 非純（輸出為副作用）。
-

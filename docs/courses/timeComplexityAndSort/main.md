@@ -190,26 +190,25 @@ $$\frac{n}{2^k} = 1$$
 
 先自己實作看看吧！寫不出來的話可以參考下面的範例程式碼。
 
-~~~admonish info title="範例程式碼" collapsible=true
-```kotlin
-fun binarySearch(arr: Array<Int>, target: Int): Int {
-    var left = 0
-    var right = arr.size - 1
-
-    while (left <= right) {
-        val mid = left + (right - left) / 2
-
-        when {
-            arr[mid] == target -> return mid // 找到目標數字，回傳索引
-            arr[mid] < target -> left = mid + 1 // 目標數字在右半邊
-            else -> right = mid - 1 // 目標數字在左半邊
+??? info "範例程式碼"
+    ```kotlin
+    fun binarySearch(arr: Array<Int>, target: Int): Int {
+        var left = 0
+        var right = arr.size - 1
+    
+        while (left <= right) {
+            val mid = left + (right - left) / 2
+    
+            when {
+                arr[mid] == target -> return mid // 找到目標數字，回傳索引
+                arr[mid] < target -> left = mid + 1 // 目標數字在右半邊
+                else -> right = mid - 1 // 目標數字在左半邊
+            }
         }
+    
+        return -1 // 目標數字不在陣列中
     }
-
-    return -1 // 目標數字不在陣列中
-}
-```
-~~~
+    ```
 
 ### 特殊二分搜
 
@@ -241,39 +240,37 @@ fun binarySearch(arr: Array<Int>, target: Int): Int {
 我們可以發現，當我們找到一個大於等於目標數字的元素時，我們不一定要馬上回傳它，
 可以把它記錄下來，然後繼續往左半邊尋找，這樣就能找到最左邊、第一個大於等於目標數字的元素。
 
-~~~admonish info title="範例程式碼" collapsible=true
-```kotlin
-fun binarySearchFirstGreaterEqual(arr: Array<Int>, target: Int): Int {
-    var left = 0
-    var right = arr.size - 1
-    var result = -1
-    while (left <= right) {
-        val mid = left + (right - left) / 2
-
-        if (arr[mid] >= target) {
-            result = mid // 記錄下目前找到的大於等於目標數字的索引
-            right = mid - 1 // 繼續在左半邊尋找
-        } else {
-            left = mid + 1 // 目標數字在右半邊
+??? info "範例程式碼"
+    ```kotlin
+    fun binarySearchFirstGreaterEqual(arr: Array<Int>, target: Int): Int {
+        var left = 0
+        var right = arr.size - 1
+        var result = -1
+        while (left <= right) {
+            val mid = left + (right - left) / 2
+    
+            if (arr[mid] >= target) {
+                result = mid // 記錄下目前找到的大於等於目標數字的索引
+                right = mid - 1 // 繼續在左半邊尋找
+            } else {
+                left = mid + 1 // 目標數字在右半邊
+            }
         }
+        return result // 回傳第一個大於等於目標數字的索引
     }
-    return result // 回傳第一個大於等於目標數字的索引
-}
-```
-~~~
+    ```
 
 ##### 伐木問題
 
-~~~admonish note title="問題描述"
-伐木工米爾科需要砍伐 $M$ 公尺的木材。這對米爾科而言是輕而易舉的任務，因為他擁有一台嶄新的電鋸，能如野火般迅速穿透森林。
-
-然而米爾科僅被允許沿著一列的樹進行伐木。
-米爾科的電鋸運作方式如下：他設定高度參數 $H$（公尺）。電鋸將巨型鋸片升至高度 $H$，並砍除所有高於 $H$ 的樹木部分，隨後米爾科會收集這些被砍下的樹木段落。
-
-舉例而言，若一排樹木高度分別為 $20, 15, 10, 17$ 公尺，米爾科將鋸片升至 $15$ 公尺高度後，樹木殘留高度將變為 $15、15、10、15$ 公尺。米爾科將從第一棵樹獲得5公尺木材，從第四棵樹獲得2公尺木材，總計7公尺木材。
-
-米爾科深切關注生態保育，因此絕不會過度砍伐木材。正因如此，他才將鋸片設定在最高可能位置。你的任務是協助米爾科找出鋸片高度 $H$ 的最大整數值，使他至少能獲得 $M$ 公尺木材。換言之，若將鋸片再升高一公尺，所獲木材量將低於 $M$ 公尺。
-~~~
+!!! note "問題描述"
+    伐木工米爾科需要砍伐 $M$ 公尺的木材。這對米爾科而言是輕而易舉的任務，因為他擁有一台嶄新的電鋸，能如野火般迅速穿透森林。
+    
+    然而米爾科僅被允許沿著一列的樹進行伐木。
+    米爾科的電鋸運作方式如下：他設定高度參數 $H$（公尺）。電鋸將巨型鋸片升至高度 $H$，並砍除所有高於 $H$ 的樹木部分，隨後米爾科會收集這些被砍下的樹木段落。
+    
+    舉例而言，若一排樹木高度分別為 $20, 15, 10, 17$ 公尺，米爾科將鋸片升至 $15$ 公尺高度後，樹木殘留高度將變為 $15、15、10、15$ 公尺。米爾科將從第一棵樹獲得5公尺木材，從第四棵樹獲得2公尺木材，總計7公尺木材。
+    
+    米爾科深切關注生態保育，因此絕不會過度砍伐木材。正因如此，他才將鋸片設定在最高可能位置。你的任務是協助米爾科找出鋸片高度 $H$ 的最大整數值，使他至少能獲得 $M$ 公尺木材。換言之，若將鋸片再升高一公尺，所獲木材量將低於 $M$ 公尺。
 
 當我們的電鋸放的越低，能砍下的木材就越多；反之，當電鋸放的越高，能砍下的木材就越少，
 如果用函數 $f(H)$ 來表示當電鋸高度為 $H$ 時，能砍下的木材長度，我們可以發現這是一個單調遞減的函數。
@@ -285,31 +282,30 @@ fun binarySearchFirstGreaterEqual(arr: Array<Int>, target: Int): Int {
 
 像是這種具有單調性質的問題，我們就可以在每一個操作後，明確的知道結果是「大於等於目標」或是「小於目標」，然後利用二分搜尋法來尋找最佳解。
 
-~~~admonish info title="範例程式碼" collapsible=true
-```kotlin
-fun woodCuttingHeights(trees: Array<Int>, M: Int): Int {
-    var left = 0
-    var right = trees.maxOrNull() ?: 0
-    var result = 0
-    while (left <= right) {
-        val mid = left + (right - left) / 2
-        val woodCollected = 0
-        for (tree in trees) {
-            if (tree > mid) {
-                woodCollected += (tree - mid)
+??? info "範例程式碼"
+    ```kotlin
+    fun woodCuttingHeights(trees: Array<Int>, M: Int): Int {
+        var left = 0
+        var right = trees.maxOrNull() ?: 0
+        var result = 0
+        while (left <= right) {
+            val mid = left + (right - left) / 2
+            val woodCollected = 0
+            for (tree in trees) {
+                if (tree > mid) {
+                    woodCollected += (tree - mid)
+                }
+            }
+            if (woodCollected >= M) {
+                result = mid // 記錄下目前找到的高度
+                left = mid + 1 // 嘗試更高的高度
+            } else {
+                right = mid - 1 // 高度太高，嘗試更低的高度
             }
         }
-        if (woodCollected >= M) {
-            result = mid // 記錄下目前找到的高度
-            left = mid + 1 // 嘗試更高的高度
-        } else {
-            right = mid - 1 // 高度太高，嘗試更低的高度
-        }
+        return result // 回傳最大高度
     }
-    return result // 回傳最大高度
-}
-```
-~~~
+    ```
 
 ### Summary
 
