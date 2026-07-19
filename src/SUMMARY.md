@@ -16,7 +16,7 @@
     - [靜態區間操作](courses/scaningTwoPointerRQ/static-range.md)
     - [掃描線](courses/scaningTwoPointerRQ/scan-line.md)
     - [雙指針](courses/scaningTwoPointerRQ/two-pointer.md)
-- [貪婪法]()
+- [貪心法](courses/greedy/main.md)
 - [動態規劃]()
 - [圖論基礎]()
 - [數論]()

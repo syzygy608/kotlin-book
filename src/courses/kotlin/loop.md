@@ -324,3 +324,8 @@ for (i in matrix.indices) {
 * 二維資料結構適用於矩陣問題，使用雙層結構和雙重迴圈遍歷
 * 根據需求選擇適合的資料結構
 
+### 題單
+
+- [Codeforces 2242 A](https://codeforces.com/problemset/problem/2242/A)
+- [Codeforces 2241 A](https://codeforces.com/problemset/problem/2241/A)
+- Codeforces 上 800 分的題目，用來練習基礎語法
