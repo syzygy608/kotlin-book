@@ -23,7 +23,6 @@ theme:
           name: Switch to light mode
   features:
     # === 導航功能 ===
-    - navigation.sections  # 側邊欄分區顯示
     - navigation.expand    # 自動展開導航項
     - navigation.top       # 顯示返回頂部按鈕
     - navigation.footer    # 顯示頁腳導航
