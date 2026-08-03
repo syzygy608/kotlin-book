@@ -4,23 +4,21 @@ theme:
   name: materialx
   language: zh-Hant
   palette:
-      # Palette toggle for light mode
       - media: "(prefers-color-scheme: light)"
         scheme: default
         primary: indigo
         accent: indigo
         toggle:
           icon: material/brightness-7
-          name: Switch to dark mode
+          name: 切換至深色模式
 
-      # Palette toggle for dark mode
       - media: "(prefers-color-scheme: dark)"
         scheme: slate
         primary: purple
         accent: purple
         toggle:
           icon: material/brightness-4
-          name: Switch to light mode
+          name: 切換至淺色模式
   features:
     # === 導航功能 ===
     - navigation.expand    # 自動展開導航項
@@ -44,36 +42,39 @@ theme:
     - announce.dismiss    # 可關閉公告
 
 markdown_extensions:
-  - tables                 # 支援表格功能
-  - attr_list             # 支援屬性列表
-  - md_in_html            # 支援在 HTML 中使用 Markdown
-  - pymdownx.highlight:    # 程式碼高亮
-      anchor_linenums: true  # 行號錨點
-  - pymdownx.superfences   # 支援高級圍欄程式碼區塊
-  - admonition            # 支援提示區塊
-  - pymdownx.details      # 支援可折疊區塊
-  - pymdownx.tabbed:      # 支援分頁內容
-      alternate_style: true
-  - footnotes             # 支援腳註
-  - def_list              # 支援定義列表
-  - pymdownx.tasklist:    # 支援任務列表
-      custom_checkbox: true  # 自定義核取方塊樣式
-  - toc:                  # 目錄設置
-      permalink: true     # 顯示標題永久連結
-
-  - pymdownx.arithmatex:
-      generic: true
+    - tables
+    - attr_list
+    - md_in_html
+    - footnotes
+    - def_list
+    - pymdownx.highlight:
+        anchor_linenums: true
+        use_pygments: true
+    - pymdownx.superfences
+    - admonition
+    - pymdownx.details
+    - pymdownx.tabbed:
+        alternate_style: true
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - toc:
+        permalink: "#"
+    - pymdownx.arithmatex:
+        generic: true
+    - pymdownx.snippets
+    - pymdownx.inlinehilite
 
 extra_javascript:
-  - javascripts/katex.js
   - https://unpkg.com/katex@0/dist/katex.min.js
   - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+  - javascripts/katex.js
 
 extra_css:
   - https://unpkg.com/katex@0/dist/katex.min.css
 
 plugins:
-  - search
+  - search:
+      lang: zh
 
 nav:
   - 網站簡介: index.md
@@ -85,12 +86,12 @@ nav:
   - 時間複雜度排序與二分搜尋法: courses/timeComplexityAndSort/main.md
   - 常用擴充函式: courses/standardUsefulUtilities/function.md
   - 常用資料結構: courses/standardUsefulUtilities/data-structure.md
-  - 掃描線、雙指針技巧與靜態區間操作:
-      - 靜態區間操作: courses/scaningTwoPointerRQ/static-range.md
-      - 掃描線: courses/scaningTwoPointerRQ/scan-line.md
-      - 雙指針: courses/scaningTwoPointerRQ/two-pointer.md
+  - 常見基礎演算法:
+      - 靜態區間操作: courses/BasicAlgo/static-range.md
+      - 掃描線: courses/BasicAlgo/scan-line.md
+      - 雙指針: courses/BasicAlgo/two-pointer.md
   - 貪心法: courses/greedy/main.md
-  # - 動態規劃: todo.md
+  - 動態規劃: courses/dp/basic.md
   # - 圖論基礎: todo.md
   # - 數論: todo.md
   # - 區間查詢資料結構: todo.md

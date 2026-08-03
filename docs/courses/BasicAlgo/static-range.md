@@ -346,9 +346,6 @@ fun applyRectAdds(rows: Int, cols: Int, updates: List<RectAdd>): List<List<Long>
 
 ## 題單
 
-- [CSES 1646 - Static Range Sum Queries](https://cses.fi/problemset/task/1646)
-- [CSES 1650 - Range Xor Queries](https://cses.fi/problemset/task/1650)
-- [CSES 1652 - Forest Queries](https://cses.fi/problemset/task/1652)
+- [Codeforces 1807 D](https://codeforces.com/contest/1807/problem/D)
+- [Codeforces 474 B](https://codeforces.com/contest/474/problem/B)
 - [AtCoder ABC183 D - Water Heater](https://atcoder.jp/contests/abc183/tasks/abc183_d)
-
-CSES 平台沒有提供 Kotlin，但你還是可以學習核心精神。

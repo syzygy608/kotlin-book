@@ -40,7 +40,7 @@
 
 這類問題我們只需要關心狀態改變的瞬間，這個將區間拆分成兩個事件，透過事先將事件排序之後，在端點上處理計算的作法，我們就稱為掃描線（一維）。
 
-??? info "範例程式碼"
+=== "範例程式碼"
     ```kotlin
     fun main() {
         val n = readLine()!!.toInt()
@@ -68,7 +68,7 @@
     ```
 
     
-??? info "範例程式碼 2 (More FP Way)"
+=== "範例程式碼 2 (More FP Way)"
     ```kotlin
     fun main() {
         val n = readLine()!!.toInt()

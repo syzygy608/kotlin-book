@@ -278,3 +278,9 @@ $n = 4$ 的執行結果如下：
 ## References
 
 - [南京大學蔣炎岩教授的遞迴課程](https://www.bilibili.com/video/BV1Y2421A7sB/?share_source=copy_web&vd_source=8eb0208b6e349b456c095c16067fb3af)
+
+## 題單
+
+- [Reach Value](https://codeforces.com/group/MWSDmqGsZm/contest/223339/problem/W)
+- [Number of Ways](https://codeforces.com/group/MWSDmqGsZm/contest/223339/problem/Y)
+- [Atcoder Beginner Contest 247 C](https://atcoder.jp/contests/abc247/tasks/abc247_c)
