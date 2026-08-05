@@ -50,7 +50,11 @@ markdown_extensions:
     - pymdownx.highlight:
         anchor_linenums: true
         use_pygments: true
-    - pymdownx.superfences
+    - pymdownx.superfences:
+          custom_fences:
+            - name: mermaid
+              class: mermaid
+              format: !!python/name:pymdownx.superfences.fence_code_format
     - admonition
     - pymdownx.details
     - pymdownx.tabbed:
@@ -92,6 +96,6 @@ nav:
       - 雙指針: courses/BasicAlgo/two-pointer.md
   - 貪心法: courses/greedy/main.md
   - 動態規劃: courses/dp/basic.md
-  # - 圖論基礎: todo.md
+  - 圖論基礎: courses/graph/basic.md
   # - 數論: todo.md
   # - 區間查詢資料結構: todo.md
